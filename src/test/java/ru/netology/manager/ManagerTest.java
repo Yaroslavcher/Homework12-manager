@@ -1,104 +1,52 @@
 package ru.netology.manager;
 
+import org.mockito.Mockito;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ManagerTest {
-    Manager manager = new Manager();
+/*    Repository repo = Mockito.mock(Repository.class);*/
+    Repository repo = new Repository();
+    Manager manager = new Manager(repo);
+    Films film1 = new Films(1, "name1");
+    Films film2 = new Films(2, "name2");
+    Films film3 = new Films(3, "name3");
 
-    @BeforeEach
-    public void b4EachTest() {
-        manager.add("Film1");
-        manager.add("Film2");
-        manager.add("Film3");
-        manager.add("Film4");
-        manager.add("Film5");
-        manager.add("Film6");
-        manager.add("Film7");
-        manager.add("Film8");
-        manager.add("Film9");
-        manager.add("Film10");
-        manager.add("Film11");
-        manager.add("Film12");
+    Films[] films = {film1, film2, film3};
+
+    @Test
+    public void shouldAddFilm() {
+        Films[] films = {film1, film2, film3};
+        Films film4 = new Films(4, "name4");
+        manager.add(film4);
+/*        doReturn(films).when(repo).findAll();*/
+        Films[] expected = {film1, film2, film3, film4};
+        assertArrayEquals(expected, repo.findAll());
     }
 
     @Test
-    public void shouldFindAll() {
-        String[] expected = {
-                "Film1",
-                "Film2",
-                "Film3",
-                "Film4",
-                "Film5",
-                "Film6",
-                "Film7",
-                "Film8",
-                "Film9",
-                "Film10",
-                "Film11",
-                "Film12"};
-        assertArrayEquals(expected, manager.findAll());
-    }
-
-    @Test
-    public void shouldFindLastTenFilms() {
-        String[] expected = {
-                "Film12",
-                "Film11",
-                "Film10",
-                "Film9",
-                "Film8",
-                "Film7",
-                "Film6",
-                "Film5",
-                "Film4",
-                "Film3"};
+    public void shouldFindLastTwoFilms() {
+        Manager manager = new Manager(2);
+        doReturn(films).when(repo).findAll();
+        Films[] expected = {
+                film3,
+                film2};
         assertArrayEquals(expected, manager.findLast());
     }
 
     @Test
     public void shouldFindLastOneFilm() {
         Manager manager = new Manager(1);
-        manager.add("Film1");
-        manager.add("Film2");
-        manager.add("Film3");
-        manager.add("Film4");
-        manager.add("Film5");
-        manager.add("Film6");
-        manager.add("Film7");
-        manager.add("Film8");
-        manager.add("Film9");
-        manager.add("Film10");
-        manager.add("Film11");
-        manager.add("Film12");
-        String[] expected = {"Film12"};
+        doReturn(films).when(repo).findAll();
+/*        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);*/
+
+        Films[] expected = {film3};
         assertArrayEquals(expected, manager.findLast());
     }
 
-    @Test
-    public void shouldFindLastFiveFilms() {
-        Manager manager = new Manager(5);
-        manager.add("Film1");
-        manager.add("Film2");
-        manager.add("Film3");
-        manager.add("Film4");
-        manager.add("Film5");
-        manager.add("Film6");
-        manager.add("Film7");
-        manager.add("Film8");
-        manager.add("Film9");
-        manager.add("Film10");
-        manager.add("Film11");
-        manager.add("Film12");
-        String[] expected = {
-                "Film12",
-                "Film11",
-                "Film10",
-                "Film9",
-                "Film8"};
-        assertArrayEquals(expected, manager.findLast());
-    }
 
 }
