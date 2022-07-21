@@ -18,9 +18,12 @@ public class ManagerTest {
 
     @Test
     public void shouldAddFilm() {
-        Films[] films = {film1, film2, film3};
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
         Films film4 = new Films(4, "name4");
         manager.add(film4);
+        Films[] films = {film1, film2, film3, film4};
 /*        doReturn(films).when(repo).findAll();*/
         Films[] expected = {film1, film2, film3, film4};
         assertArrayEquals(expected, repo.findAll());
