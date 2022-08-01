@@ -18,6 +18,9 @@ public class ManagerTest {
     @Test
     public void shouldFindLastTwoFilms() {
         Manager manager = new Manager(2);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
         doReturn(films).when(repo).findAll();
         Films[] expected = {
                 film3,
@@ -28,7 +31,10 @@ public class ManagerTest {
     @Test
     public void shouldFindLastOneFilm() {
         Manager manager = new Manager(1);
-        doReturn(films).when(repo).findAll();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+/*        doReturn(films).when(repo).findAll();*/
 /*        repo.save(film1);
         repo.save(film2);
         repo.save(film3);*/

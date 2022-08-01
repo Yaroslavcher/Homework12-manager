@@ -6,7 +6,7 @@ public class Repository {
     protected String name;*/
     protected Films[] films = new Films[0];
 
-/*    Repository repo = new Repository();*/
+    Repository repo = new Repository();
 
     public Films[] findAll() {
         return films;
@@ -20,11 +20,11 @@ public class Repository {
         tmp[tmp.length - 1] = film;
         films = tmp;
     }
-    public Films[] findById(int searchId) {
+    public String findById(int searchId) {
  /*       Films[] result = new Films[0];*/
         for (Films film : films) {
             if (film.getId() == searchId) {
-                return films;
+                return film.getName();
             }
         }
         System.out.println("Фильмов с id = " + searchId + " не найдено");

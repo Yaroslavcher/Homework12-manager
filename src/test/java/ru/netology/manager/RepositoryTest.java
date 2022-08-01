@@ -1,7 +1,7 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+    import org.junit.jupiter.api.Test;
+    import static org.junit.jupiter.api.Assertions.*;
 
 public class RepositoryTest {
     Films film1 = new Films(1, "name1");
@@ -39,15 +39,21 @@ public class RepositoryTest {
     @Test
     public void shouldFindById() {
         Repository repo = new Repository();
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
         int searchId = 2;
-        Films[] expected = {film2};
+        String expected = "name2";
 
-        assertArrayEquals(expected, repo.findById(2));
+        assertEquals(expected, repo.findById(2));
     }
 
     @Test
     public void shouldRemoveById() {
         Repository repo = new Repository();
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
         int id = 2;
         Films[] expected = {film1, film3};
         Films[] actual = repo.removeById(2);
